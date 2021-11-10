@@ -7,3 +7,6 @@
 
 ### GithubActions
 [![Node CI](https://github.com/hellion86/frontend-project-lvl2/workflows/linter-test/badge.svg)](https://github.com/hellion86/frontend-project-lvl2/actions)
+
+### Example of work
+[![asciicast](https://asciinema.org/a/tJux4whWukLZ3kIcpPkDl5lQX.svg)](https://asciinema.org/a/tJux4whWukLZ3kIcpPkDl5lQX)
