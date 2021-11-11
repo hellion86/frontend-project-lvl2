@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
-export const makeCompare = (file1, file2) => {
+const genDiff = (file1, file2) => {
   const firstConfig = readFileSync(resolve(file1), 'utf-8');
   const secondConfig = readFileSync(resolve(file2), 'utf-8');
   const obj1 = JSON.parse(firstConfig);
@@ -21,12 +21,9 @@ export const makeCompare = (file1, file2) => {
     }
     return acc;
   }, {});
-  return resultDiff;
-};
-
-export const genDiff = (file1, file2) => {
-  const diff = makeCompare(file1, file2);
   console.log('{');
-  Object.keys(diff).map((el) => (console.log(`${el}: ${diff[el]}`)));
+  Object.keys(resultDiff).map((el) => (console.log(`${el}: ${resultDiff[el]}`)));
   console.log('}');
 };
+
+export default genDiff;
