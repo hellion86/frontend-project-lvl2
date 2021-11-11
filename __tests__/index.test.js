@@ -1,13 +1,17 @@
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { test, expect } from '@jest/globals';
-import { makeCompare } from '../src/index.js';
+import { readFileSync } from 'fs';
+import { makeCompare, genDiff } from '../src/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const getFixturePath = (filename) => join(__dirname, '..', '__fixtures__', filename);
 
 const firstConfig = getFixturePath('file1.json');
+const config = getFixturePath('file1-2diff');
+const firstConfigToRead = readFileSync(config, 'utf-8');
+console.log(firstConfigToRead);
 const secondConfig = getFixturePath('file2.json');
 const thirdConfig = getFixturePath('file3.json');
 const fourConfig = getFixturePath('file4.json');
@@ -44,4 +48,9 @@ test('genDiff thirdConfig of fourConfig', () => {
     '- timeout': 150,
   };
   expect(makeCompare(thirdConfig, fourConfig)).toEqual(expected);
+});
+
+test('console.log', () => {
+  const result = genDiff(thirdConfig, fourConfig);
+  expect(result).toEqual(console.log(firstConfigToRead));
 });

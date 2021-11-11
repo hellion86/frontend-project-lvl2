@@ -24,11 +24,9 @@ export const makeCompare = (file1, file2) => {
   return resultDiff;
 };
 
-const genDiff = (file1, file2) => {
+export const genDiff = (file1, file2) => {
   const diff = makeCompare(file1, file2);
   console.log('{');
   Object.keys(diff).map((el) => (console.log(`${el}: ${diff[el]}`)));
   console.log('}');
 };
-
-export default genDiff;
