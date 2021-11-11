@@ -8,13 +8,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-        name: Setup node.js version
+      - name: Setup node.js version
         with:
           node-version: '16.x'
       - name: npm install
         run: make install
       - name: test & publish code coverage
-      - uses: paambaati/codeclimate-action@v2.2.4
+        uses: paambaati/codeclimate-action@v2.2.4
         env:
           CC_TESTREPORTER: ${{ secrets.CC_TESTREPORTER }}
-        run: make test
+        with:
+          coverageCommand: make test-coverage
