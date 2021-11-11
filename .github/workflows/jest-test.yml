@@ -7,14 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup node.js version
       - uses: actions/setup-node@v1
         with:
           node-version: '16.x'
-      - name: npm install
         run: make install
-      - name: test & publish code coverage
-        uses: paambaati/codeclimate-action@v2.2.4
+      - uses: paambaati/codeclimate-action@v2.2.4
         env:
           CC_TESTREPORTER: ${{ secrets.CC_TESTREPORTER }}
         with:
