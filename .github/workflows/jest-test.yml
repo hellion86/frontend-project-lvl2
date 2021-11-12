@@ -8,17 +8,19 @@ jobs:
   
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [16.x]
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
       - name: npm install
         run: make install
-      - name: run tests
-        uses: paambaati/codeclimate-action@v2.7.4
+        env:
+          CI: true
+      - name: run tests & publish coverage
+        uses: paambaati/codeclimate-action@v2.2.4
         env:
           CC_TESTREPORTER: ${{ secrets.CC_TESTREPORTER }}
         with:
-          coverageCommand: make test
+          coverageCommand: make test-coverage
           debug: true
