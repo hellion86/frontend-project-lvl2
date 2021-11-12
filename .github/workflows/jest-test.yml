@@ -15,6 +15,7 @@ jobs:
         uses: actions/setup-node@v1
       - name: npm install
         run: make install
+        debug: true
       - name: run tests
         uses: paambaati/codeclimate-action@v2.7.4
         env:
