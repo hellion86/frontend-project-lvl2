@@ -5,17 +5,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-  
-    strategy:
-      matrix:
-        node-version: [16.x]
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v1
+        name: 'setup node'
+        with:
+          node-version: '16.x'
       - name: npm install
         run: make install
         env:
           CI: true
       - name: run tests & publish coverage
-        run: make test
+        run: make test-coverage
