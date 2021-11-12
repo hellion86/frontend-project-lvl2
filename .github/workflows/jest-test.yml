@@ -20,4 +20,4 @@ jobs:
         env:
           CC_TESTREPORTER: ${{ secrets.CC_TESTREPORTER }}
         with:
-          coverageCommand: make test-coverage
+          coverageCommand: make test
