@@ -18,9 +18,4 @@ jobs:
         env:
           CI: true
       - name: run tests & publish coverage
-        uses: paambaati/codeclimate-action@v2.7.4
-        env:
-          CC_TESTREPORTER: ${{ secrets.CC_TESTREPORTER }}
-        with:
-          coverageCommand: make test-coverage
-          debug: true
+        run: make test
