@@ -3,16 +3,11 @@ import { readFileSync } from 'fs';
 import { resolve, extname } from 'path';
 import { load } from 'js-yaml';
 
-export const parse = (filePath) => {
-  const extension = extname(filePath);
-  const data = readFileSync(resolve(filePath), 'utf-8');
-  const resultofParse = (extension === '.yml' || extension === '.yaml') ? load(data) : JSON.parse(data);
-  return resultofParse;
-};
+export const parse = (data, extension) => ((extension === '.yml' || extension === '.yaml') ? load(data) : JSON.parse(data));
 
 export const genDiff = (filePath1, filePath2) => {
-  const obj1 = parse(filePath1);
-  const obj2 = parse(filePath2);
+  const obj1 = parse(readFileSync(resolve(filePath1), 'utf-8'), extname(filePath1));
+  const obj2 = parse(readFileSync(resolve(filePath2), 'utf-8'), extname(filePath2));
   const allKeys = _.uniq([..._.keys(obj1), ..._.keys(obj2)]).sort();
   const resultDiff = allKeys.reduce((acc, key) => {
     if (!_.has(obj1, key)) {
