@@ -14,4 +14,4 @@
 - Usage: _gendiff -h_
 
 ### Example of work
-[![asciicast](https://asciinema.org/a/tJux4whWukLZ3kIcpPkDl5lQX.svg)](https://asciinema.org/a/tJux4whWukLZ3kIcpPkDl5lQX)
+[![asciicast](https://asciinema.org/a/9O6KXdLquyzYtVTUz77vuew1i.svg)](https://asciinema.org/a/9O6KXdLquyzYtVTUz77vuew1i)
