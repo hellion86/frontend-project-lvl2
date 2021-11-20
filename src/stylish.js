@@ -1,7 +1,7 @@
 import { isObject, normalized } from './utils.js';
 
 const stylish = (diff, counter = 4) => {
-  const stringify = (row, sp, count) => {
+  const stringify = (row, space, count) => {
     if (!isObject(row)) {
       return `${row}`;
     }
@@ -14,7 +14,7 @@ const stylish = (diff, counter = 4) => {
       });
       return `${result.join('\n')}\n${' '.repeat(num - 4)}}`;
     };
-    const items = iter(row, sp, count);
+    const items = iter(row, space, count);
     return `{\n${items}`;
   };
 
