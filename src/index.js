@@ -4,7 +4,7 @@ import { resolve, extname } from 'path';
 import stylish from './stylish.js';
 import { isObject, normalized, parse } from './utils.js';
 
-export const genDiff = (filePath1, filePath2) => {
+export const genDiff = (filePath1, filePath2, format = 'stylish') => {
   const firsObject = parse(readFileSync(resolve(filePath1), 'utf-8'), extname(filePath1));
   const secondObject = parse(readFileSync(resolve(filePath2), 'utf-8'), extname(filePath2));
   const makeTreeDifference = (obj1, obj2) => {
@@ -29,7 +29,17 @@ export const genDiff = (filePath1, filePath2) => {
       return { key, value: value1, status: 'unchanged' };
     });
   };
-  return `${stylish(makeTreeDifference(firsObject, secondObject))}`;
-};
 
+  let formatChoose;
+  switch (format) {
+    case 'stylish':
+      formatChoose = stylish(makeTreeDifference(firsObject, secondObject));
+      break;
+    case 'plain':
+      console.log('plain');
+      break;
+    default:
+  }
+  return formatChoose;
+};
 export default genDiff;

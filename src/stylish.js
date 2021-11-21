@@ -1,44 +1,39 @@
 import { isObject, normalized } from './utils.js';
 
-const stylish = (diff, counter = 4) => {
-  const stringify = (row, space, count) => {
-    if (!isObject(row)) {
-      return `${row}`;
-    }
-    const iter = (obj, cups, num) => {
-      const result = Object.entries(obj).map(([key, value]) => {
+const stylish = (diffOfObjects) => {
+  const stringify = (recordValue, spaceCount) => {
+    const iter = (data, spaceNum) => {
+      const result = Object.entries(data).map(([key, value]) => {
         if (isObject(normalized(value))) {
-          return `${' '.repeat(num)}${key}: {\n${iter(value, ' ', num + 4)}`;
+          return `${' '.repeat(spaceNum)}${key}: {\n${iter(value, spaceNum + 4)}\n${' '.repeat(spaceNum)}}`;
         }
-        return `${' '.repeat(num)}${key}: ${value}`;
-      });
-      return `${result.join('\n')}\n${' '.repeat(num - 4)}}`;
+        return `${' '.repeat(spaceNum)}${key}: ${value}`;
+      }).join('\n');
+      return `${result}`;
     };
-    const items = iter(row, space, count);
-    return `{\n${items}`;
+    return !isObject(recordValue) ? `${recordValue}` : `{\n${iter(recordValue, spaceCount)}\n${' '.repeat(spaceCount - 4)}}`;
   };
 
-  const assembledTree = (obj, num) => {
-    const tree = obj.map((record) => {
+  const assembledTree = (data, spaceNum) => {
+    const tree = data.map((record) => {
       switch (record.status) {
         case 'nested':
-          return `${' '.repeat(num)}${record.key}: {\n${assembledTree(record.value, num + counter)}\n${' '.repeat(num)}}`;
+          return `${' '.repeat(spaceNum)}${record.key}: {\n${assembledTree(record.value, spaceNum + 4)}\n${' '.repeat(spaceNum)}}`;
         case 'changed':
-          return `${' '.repeat(num - 2)}- ${record.key}: ${stringify(record.value, ' ', num + counter)}\n${' '.repeat(num - 2)}+ ${record.key}: ${stringify(record.oldValue, ' ', num)}`;
+          return `${' '.repeat(spaceNum - 2)}- ${record.key}: ${stringify(record.value, spaceNum + 4)}\n${' '.repeat(spaceNum - 2)}+ ${record.key}: ${stringify(record.oldValue, spaceNum)}`;
         case 'added':
-          return `${' '.repeat(num - 2)}+ ${record.key}: ${stringify(record.value, ' ', num + counter)}`;
+          return `${' '.repeat(spaceNum - 2)}+ ${record.key}: ${stringify(record.value, spaceNum + 4)}`;
         case 'deleted':
-          return `${' '.repeat(num - 2)}- ${record.key}: ${stringify(record.value, ' ', num + counter)}`;
+          return `${' '.repeat(spaceNum - 2)}- ${record.key}: ${stringify(record.value, spaceNum + 4)}`;
         case 'unchanged':
-          return `${' '.repeat(num)}${record.key}: ${stringify(record.value, ' ', num)}`;
+          return `${' '.repeat(spaceNum)}${record.key}: ${stringify(record.value, spaceNum)}`;
         default:
+          return false;
       }
-      return true;
     }).join('\n');
     return tree;
   };
-  const displayDiff = assembledTree(diff, counter);
-  return `{\n${displayDiff}\n}`;
+  return `{\n${assembledTree(diffOfObjects, 4)}\n}`;
 };
 
 export default stylish;
