@@ -1,21 +1,34 @@
-import _ from 'lodash';
-import { isObject, normalized } from '../utils.js';
+const normalizedValueName = (object) => {
+  if (typeof object === 'object') {
+    return '[complex value]';
+  }
+  if (typeof object === 'string' && object !== 'null') {
+    return `'${object}'`;
+  }
+  return object;
+};
 
 const plain = (diff) => {
-  const seeWhatIn = (record) => {
-
-  };
-  const assembledTree = (data) => {
+  const assembledTree = (data, path = '') => {
     const tree = data.map((record) => {
-      if (Array.isArray(record.value)) {
-        return assembledTree(record.value);
+      if (record.status === 'nested') {
+        const fullPath = `${path}.${record.key}`;
+        return assembledTree(record.value, fullPath);
       }
-      if (record.status !== 'unchanged') {
-        return `no arrays in ${record.key} `;
+      const normalizedPath = `${path}.${record.key}`.slice(1);
+      switch (record.status) {
+        case 'added':
+          return `Property '${normalizedPath}' was added with ${normalizedValueName(record.value)}`;
+        case 'deleted':
+          return `Property '${normalizedPath}' was removed`;
+        case 'changed':
+          return `Property '${normalizedPath}' was updated from ${normalizedValueName(record.value)} to ${normalizedValueName(record.oldValue)}`;
+        default:
+          return false;
       }
-    }).join('\n');
+    }).filter((el) => el).join('\n');
     return tree;
-		};
- 	return assembledTree(diff);
+  };
+  return assembledTree(diff);
 };
 export default plain;

@@ -16,7 +16,6 @@ const stylish = (diffOfObjects) => {
 
   const assembledTree = (data, spaceNum) => {
     const tree = data.map((record) => {
-      console.log(record);
       switch (record.status) {
         case 'nested':
           return `${' '.repeat(spaceNum)}${record.key}: {\n${assembledTree(record.value, spaceNum + 4)}\n${' '.repeat(spaceNum)}}`;

@@ -14,12 +14,22 @@ const secondJsonConfig = getFixturePath('file2.json');
 const firstYamlConfig = getFixturePath('file1.yml');
 const secondYamlConfig = getFixturePath('file2.yml');
 
-test('Test YAML diff', () => {
-  const expected = readFile('diffResult.txt');
-  expect(genDiff(firstYamlConfig, secondYamlConfig)).toBe(expected);
+test('Test stylish YAML diff', () => {
+  const expected = readFile('diffResultStylish.txt');
+  expect(genDiff(firstYamlConfig, secondYamlConfig, 'stylish')).toBe(expected);
 });
 
-test('Test JSON diff', () => {
-  const expected = readFile('diffResult.txt');
-  expect(genDiff(firstJsonConfig, secondJsonConfig)).toBe(expected);
+test('Test stylish JSON diff', () => {
+  const expected = readFile('diffResultStylish.txt');
+  expect(genDiff(firstJsonConfig, secondJsonConfig, 'stylish')).toBe(expected);
+});
+
+test('Test plain YAML diff', () => {
+  const expected = readFile('diffResultPlain.txt');
+  expect(genDiff(firstYamlConfig, secondYamlConfig, 'plain')).toBe(expected);
+});
+
+test('Test plain JSON diff', () => {
+  const expected = readFile('diffResultPlain.txt');
+  expect(genDiff(firstJsonConfig, secondJsonConfig, 'plain')).toBe(expected);
 });

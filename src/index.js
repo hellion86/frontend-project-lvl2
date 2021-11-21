@@ -1,8 +1,7 @@
 import _ from 'lodash';
 import { readFileSync } from 'fs';
 import { resolve, extname } from 'path';
-import stylish from './formatters/stylish.js';
-import plain from './formatters/plain.js';
+import formatChoose from './formatters/index.js';
 import { isObject, normalized, parse } from './utils.js';
 
 export const genDiff = (filePath1, filePath2, format = 'stylish') => {
@@ -30,16 +29,6 @@ export const genDiff = (filePath1, filePath2, format = 'stylish') => {
       return { key, value: value1, status: 'unchanged' };
     });
   };
-  let formatChoose;
-  switch (format) {
-    case 'stylish':
-      formatChoose = stylish(makeTreeDifference(firsObject, secondObject));
-      break;
-    case 'plain':
-      formatChoose = plain(makeTreeDifference(firsObject, secondObject));
-      break;
-    default:
-  }
-  return formatChoose;
+  return formatChoose(makeTreeDifference(firsObject, secondObject), format);
 };
 export default genDiff;
