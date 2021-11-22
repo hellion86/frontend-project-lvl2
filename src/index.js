@@ -2,13 +2,14 @@ import _ from 'lodash';
 import { readFileSync } from 'fs';
 import { resolve, extname } from 'path';
 import formatChoose from './formatters/index.js';
-import { isObject, normalized, parse } from './utils.js';
+import { isObject, normalized } from './utils.js';
+import parse from './parsers.js';
 
 export const genDiff = (filePath1, filePath2, format = 'stylish') => {
   const firsObject = parse(readFileSync(resolve(filePath1), 'utf-8'), extname(filePath1));
   const secondObject = parse(readFileSync(resolve(filePath2), 'utf-8'), extname(filePath2));
   const makeTreeDifference = (obj1, obj2) => {
-    const allKeys = _.union(_.keys(obj1), _.keys(obj2)).sort();
+    const allKeys = _.sortBy(_.union(_.keys(obj1), _.keys(obj2)));
     return allKeys.map((key) => {
       const value1 = normalized(obj1[key]);
       const value2 = normalized(obj2[key]);
@@ -23,7 +24,7 @@ export const genDiff = (filePath1, filePath2, format = 'stylish') => {
           return { key, value: makeTreeDifference(value1, value2), status: 'nested' };
         }
         return {
-          key, value: value1, oldValue: value2, status: 'changed',
+          key, value: value2, oldValue: value1, status: 'changed',
         };
       }
       return { key, value: value1, status: 'unchanged' };

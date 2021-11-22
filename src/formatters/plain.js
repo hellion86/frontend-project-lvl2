@@ -18,11 +18,11 @@ const plain = (diff) => {
       const normalizedPath = `${path}.${record.key}`.slice(1);
       switch (record.status) {
         case 'added':
-          return `Property '${normalizedPath}' was added with ${normalizedValueName(record.value)}`;
+          return `Property '${normalizedPath}' was added with value: ${normalizedValueName(record.value)}`;
         case 'deleted':
           return `Property '${normalizedPath}' was removed`;
         case 'changed':
-          return `Property '${normalizedPath}' was updated from ${normalizedValueName(record.value)} to ${normalizedValueName(record.oldValue)}`;
+          return `Property '${normalizedPath}' was updated. From ${normalizedValueName(record.oldValue)} to ${normalizedValueName(record.value)}`;
         default:
           return false;
       }

@@ -33,3 +33,8 @@ test('Test plain JSON diff', () => {
   const expected = readFile('diffResultPlain.txt');
   expect(genDiff(firstJsonConfig, secondJsonConfig, 'plain')).toBe(expected);
 });
+
+test('Test json parser of JSON diff', () => {
+  const expected = readFile('diffResultJSON.txt');
+  expect(genDiff(firstJsonConfig, secondJsonConfig, 'json')).toBe(expected);
+});
