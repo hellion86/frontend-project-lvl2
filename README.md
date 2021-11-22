@@ -14,4 +14,8 @@
 - Usage: _gendiff -h_
 
 ### Example of work
+## recursive comparison
 [![asciicast](https://asciinema.org/a/aqAmNrPN7SBGNEtEVmwx15NTq.svg)](https://asciinema.org/a/aqAmNrPN7SBGNEtEVmwx15NTq)
+
+## plain comparison
+[![asciicast](https://asciinema.org/a/9O6KXdLquyzYtVTUz77vuew1i.svg)](https://asciinema.org/a/9O6KXdLquyzYtVTUz77vuew1i)
