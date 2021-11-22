@@ -20,7 +20,7 @@ const stylish = (diffOfObjects) => {
         case 'nested':
           return `${' '.repeat(spaceNum)}${record.key}: {\n${assembledTree(record.value, spaceNum + 4)}\n${' '.repeat(spaceNum)}}`;
         case 'changed':
-          return `${' '.repeat(spaceNum - 2)}- ${record.key}: ${stringify(record.oldValue, spaceNum + 4)}\n${' '.repeat(spaceNum - 2)}+ ${record.key}: ${stringify(record.value, spaceNum)}`;
+          return `${' '.repeat(spaceNum - 2)}- ${record.key}: ${stringify(record.oldValue, spaceNum + 4)}\n${' '.repeat(spaceNum - 2)}+ ${record.key}: ${stringify(record.value, spaceNum + 4)}`;
         case 'added':
           return `${' '.repeat(spaceNum - 2)}+ ${record.key}: ${stringify(record.value, spaceNum + 4)}`;
         case 'deleted':
