@@ -1,17 +1,17 @@
-import { isObject, normalized } from '../utils.js';
+import _ from 'lodash';
 
 const stylish = (diffOfObjects) => {
   const stringify = (recordValue, spaceCount) => {
     const iter = (data, spaceNum) => {
       const result = Object.entries(data).map(([key, value]) => {
-        if (isObject(normalized(value))) {
+        if (_.isObject(value)) {
           return `${' '.repeat(spaceNum)}${key}: {\n${iter(value, spaceNum + 4)}\n${' '.repeat(spaceNum)}}`;
         }
         return `${' '.repeat(spaceNum)}${key}: ${value}`;
       }).join('\n');
       return `${result}`;
     };
-    return !isObject(recordValue) ? `${recordValue}` : `{\n${iter(recordValue, spaceCount)}\n${' '.repeat(spaceCount - 4)}}`;
+    return !_.isObject(recordValue) ? `${recordValue}` : `{\n${iter(recordValue, spaceCount)}\n${' '.repeat(spaceCount - 4)}}`;
   };
 
   const assembledTree = (data, spaceNum) => {

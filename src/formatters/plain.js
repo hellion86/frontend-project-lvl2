@@ -1,11 +1,11 @@
-const normalizedValueName = (object) => {
-  if (typeof object === 'object') {
+const normalizedValueName = (value) => {
+  if (typeof value === 'object' && value !== null) {
     return '[complex value]';
   }
-  if (typeof object === 'string' && object !== 'null') {
-    return `'${object}'`;
+  if (typeof value === 'string') {
+    return `'${value}'`;
   }
-  return object;
+  return value;
 };
 
 const plain = (diff) => {
