@@ -11,18 +11,16 @@ const normalizedValueName = (value) => {
 const plain = (diff) => {
   const assembledTree = (data, path = '') => {
     const tree = data.map((record) => {
-      if (record.status === 'nested') {
-        const fullPath = `${path}.${record.key}`;
-        return assembledTree(record.value, fullPath);
-      }
-      const normalizedPath = `${path}.${record.key}`.slice(1);
+      const fullPath = `${path}.${record.key}`;
       switch (record.status) {
+        case 'nested':
+          return assembledTree(record.value, fullPath);
         case 'added':
-          return `Property '${normalizedPath}' was added with value: ${normalizedValueName(record.value)}`;
+          return `Property '${fullPath.slice(1)}' was added with value: ${normalizedValueName(record.value)}`;
         case 'deleted':
-          return `Property '${normalizedPath}' was removed`;
+          return `Property '${fullPath.slice(1)}' was removed`;
         case 'changed':
-          return `Property '${normalizedPath}' was updated. From ${normalizedValueName(record.oldValue)} to ${normalizedValueName(record.value)}`;
+          return `Property '${fullPath.slice(1)}' was updated. From ${normalizedValueName(record.oldValue)} to ${normalizedValueName(record.value)}`;
         default:
           return false;
       }
