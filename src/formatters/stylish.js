@@ -2,15 +2,11 @@ import _ from 'lodash';
 
 const stylish = (diffOfObjects) => {
   const stringify = (recordValue, spaceCount) => {
-    const iter = (data, spaceNum) => {
-      const result = Object.entries(data).map(([key, value]) => {
-        if (_.isObject(value)) {
-          return `${' '.repeat(spaceNum)}${key}: {\n${iter(value, spaceNum + 4)}\n${' '.repeat(spaceNum)}}`;
-        }
-        return `${' '.repeat(spaceNum)}${key}: ${value}`;
-      }).join('\n');
-      return `${result}`;
-    };
+    const iter = (data, spaceNum) => (
+      Object.entries(data).map(([key, value]) => (_.isObject(value)
+        ? `${' '.repeat(spaceNum)}${key}: {\n${iter(value, spaceNum + 4)}\n${' '.repeat(spaceNum)}}`
+        : `${' '.repeat(spaceNum)}${key}: ${value}`)).join('\n')
+    );
     return !_.isObject(recordValue) ? `${recordValue}` : `{\n${iter(recordValue, spaceCount)}\n${' '.repeat(spaceCount - 4)}}`;
   };
 
@@ -25,10 +21,8 @@ const stylish = (diffOfObjects) => {
           return `${' '.repeat(spaceNum - 2)}+ ${record.key}: ${stringify(record.value, spaceNum + 4)}`;
         case 'deleted':
           return `${' '.repeat(spaceNum - 2)}- ${record.key}: ${stringify(record.value, spaceNum + 4)}`;
-        case 'unchanged':
-          return `${' '.repeat(spaceNum)}${record.key}: ${stringify(record.value, spaceNum)}`;
         default:
-          return false;
+          return `${' '.repeat(spaceNum)}${record.key}: ${stringify(record.value, spaceNum)}`;
       }
     }).join('\n');
     return tree;
