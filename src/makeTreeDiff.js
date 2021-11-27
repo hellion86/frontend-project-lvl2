@@ -1,10 +1,6 @@
 import _ from 'lodash';
-import { readFileSync } from 'fs';
-import { resolve } from 'path';
 
-export const readDataFromFile = (file) => (readFileSync(resolve(file), 'utf-8'));
-
-export const makeTreeDifference = (obj1, obj2) => {
+const makeTreeDifference = (obj1, obj2) => {
   const allKeys = _.sortBy(_.union(_.keys(obj1), _.keys(obj2)));
   return allKeys.map((key) => {
     const value1 = obj1[key];
@@ -16,13 +12,13 @@ export const makeTreeDifference = (obj1, obj2) => {
       return { key, value: value1, status: 'deleted' };
     }
     if (value2 !== value1) {
-      if (_.isObject(value1) && _.isObject(value2)) {
-        return { key, value: makeTreeDifference(value1, value2), status: 'nested' };
-      }
-      return {
-        key, value: value2, oldValue: value1, status: 'changed',
-      };
+      return _.isObject(value1) && _.isObject(value2) ? { key, value: makeTreeDifference(value1, value2), status: 'nested' }
+        : {
+          key, value: value2, oldValue: value1, status: 'changed',
+        };
     }
     return { key, value: value1, status: 'unchanged' };
   });
 };
+
+export default makeTreeDifference;
