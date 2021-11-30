@@ -10,7 +10,8 @@ const normalizedValueName = (value) => {
 
 const plain = (diff) => {
   const assembledTree = (data, path = '') => {
-    const tree = data.map((record) => {
+    const tree = data.filter((item) => item.status !== 'unchanged')
+      .map((record) => {
       const fullPath = `${path}.${record.key}`;
       switch (record.status) {
         case 'nested':
@@ -24,7 +25,7 @@ const plain = (diff) => {
         default:
           return false;
       }
-    }).filter((el) => el).join('\n');
+    }).join('\n');
     return tree;
   };
   return assembledTree(diff);
