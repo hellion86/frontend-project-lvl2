@@ -24,7 +24,6 @@ const stylish = (diffOfObjects) => {
           return `${' '.repeat(spaceNum - 2)}- ${record.key}: ${stringify(record.oldValue, spaceNum + 4)}\n${' '.repeat(spaceNum - 2)}+ ${record.key}: ${stringify(record.value, spaceNum + 4)}`;
         case 'added':
         case 'deleted':
-          //return `${' '.repeat(spaceNum - 2)}+ ${record.key}: ${stringify(record.value, spaceNum + 4)}`;
           return `${' '.repeat(spaceNum - 2)}${states[record.status]} ${record.key}: ${stringify(record.value, spaceNum + 4)}`;
         default:
           return `${' '.repeat(spaceNum)}${record.key}: ${stringify(record.value, spaceNum)}`;
