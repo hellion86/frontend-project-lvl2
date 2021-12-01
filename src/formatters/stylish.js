@@ -1,6 +1,11 @@
 import _ from 'lodash';
 
 const stylish = (diffOfObjects) => {
+  const states = {
+    added: '+',
+    deleted: '-',
+  };
+
   const stringify = (recordValue, spaceCount) => {
     const iter = (data, spaceNum) => (
       Object.entries(data).map(([key, value]) => (_.isObject(value)
@@ -18,9 +23,9 @@ const stylish = (diffOfObjects) => {
         case 'changed':
           return `${' '.repeat(spaceNum - 2)}- ${record.key}: ${stringify(record.oldValue, spaceNum + 4)}\n${' '.repeat(spaceNum - 2)}+ ${record.key}: ${stringify(record.value, spaceNum + 4)}`;
         case 'added':
-          return `${' '.repeat(spaceNum - 2)}+ ${record.key}: ${stringify(record.value, spaceNum + 4)}`;
         case 'deleted':
-          return `${' '.repeat(spaceNum - 2)}- ${record.key}: ${stringify(record.value, spaceNum + 4)}`;
+          //return `${' '.repeat(spaceNum - 2)}+ ${record.key}: ${stringify(record.value, spaceNum + 4)}`;
+          return `${' '.repeat(spaceNum - 2)}${states[record.status]} ${record.key}: ${stringify(record.value, spaceNum + 4)}`;
         default:
           return `${' '.repeat(spaceNum)}${record.key}: ${stringify(record.value, spaceNum)}`;
       }
