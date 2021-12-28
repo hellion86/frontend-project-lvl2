@@ -4,18 +4,37 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a07a5c3b664fee55e4e1/test_coverage)](https://codeclimate.com/github/hellion86/frontend-project-lvl2/test_coverage)
 [![Node CI](https://github.com/hellion86/frontend-project-lvl2/workflows/linter-test/badge.svg)](https://github.com/hellion86/frontend-project-lvl2/actions)
 
-### Installation
-- Clone this repository
+Вычислитель отличий – программа, возвращающая разницу между двумя структурами данных. 
 
-- Run the command: _make install_
+Возможности утилиты:
+- поддержка форматов: yaml, json;
+- генерация отчета в различных форматах: plain text, stylish и json;
 
-- Run the command: _sudo npm link_
+## Системные требования
 
-- Usage: _gendiff -h_
+ - Make
+ - Git
+ - Node.js
 
-### Example of work
-## recursive comparison
+## Установка
+
+Для установки выполните следующие команды:
+
+```bash
+gh repo clone hellion86/frontend-project-lvl2
+cd frontend-project-lvl2/
+make install
+sudo npm link
+```
+
+Для просмотра справочной информации по программе выполните следующие команды:
+
+```bash
+gendiff -h
+```
+### Примеры работы
+## Сравнение в глубину
 [![asciicast](https://asciinema.org/a/aqAmNrPN7SBGNEtEVmwx15NTq.svg)](https://asciinema.org/a/aqAmNrPN7SBGNEtEVmwx15NTq)
 
-## plain comparison
+## Сравнение плоских объектов
 [![asciicast](https://asciinema.org/a/9O6KXdLquyzYtVTUz77vuew1i.svg)](https://asciinema.org/a/9O6KXdLquyzYtVTUz77vuew1i)
