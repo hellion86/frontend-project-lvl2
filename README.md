@@ -32,9 +32,9 @@ sudo npm link
 ```bash
 gendiff -h
 ```
-### Примеры работы
-## Сравнение в глубину
+## Примеры работы
+### Сравнение в глубину
 [![asciicast](https://asciinema.org/a/aqAmNrPN7SBGNEtEVmwx15NTq.svg)](https://asciinema.org/a/aqAmNrPN7SBGNEtEVmwx15NTq)
 
-## Сравнение плоских объектов
+### Сравнение плоских объектов
 [![asciicast](https://asciinema.org/a/9O6KXdLquyzYtVTUz77vuew1i.svg)](https://asciinema.org/a/9O6KXdLquyzYtVTUz77vuew1i)
