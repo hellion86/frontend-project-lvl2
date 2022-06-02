@@ -4,37 +4,33 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/a07a5c3b664fee55e4e1/test_coverage)](https://codeclimate.com/github/hellion86/frontend-project-lvl2/test_coverage)
 [![Node CI](https://github.com/hellion86/frontend-project-lvl2/workflows/linter-test/badge.svg)](https://github.com/hellion86/frontend-project-lvl2/actions)
 
-Вычислитель отличий – программа, возвращающая разницу между двумя структурами данных. 
 
-Возможности утилиты:
-- поддержка форматов: yaml, json;
-- генерация отчета в различных форматах: plain text, stylish и json;
+## Description
+:hammer:Diff generator is a program that determines the difference between two data structures. A similar mechanism is used in tests' output or while tracking changes in configuration files.
 
-## Системные требования
+Features:
 
- - Make
- - Git
- - Node.js
+* different input formats: yaml, json;
+* different report generation formats: plain text, stylish and json;
 
-## Установка
-
-Для установки выполните следующие команды:
-
-```bash
-gh repo clone hellion86/frontend-project-lvl2
-cd frontend-project-lvl2/
-make install
-sudo npm link
+### 1. Install dependencies:
+```
+$ make install
 ```
 
-Для просмотра справочной информации по программе выполните следующие команды:
+### 2. Use as console utilite
 
-```bash
-gendiff -h
 ```
-## Примеры работы
-### Сравнение в глубину
+$ cd bin
+$ chmod +x gendiff.js
+$ sudo npm link
+$ gendiff -h
+```
+
+### Using
+* Functional programming: no let/for/classes, immutable
+* JEST
+* Github Actions, Eslint
+
+### Example of work
 [![asciicast](https://asciinema.org/a/aqAmNrPN7SBGNEtEVmwx15NTq.svg)](https://asciinema.org/a/aqAmNrPN7SBGNEtEVmwx15NTq)
-
-### Сравнение плоских объектов
-[![asciicast](https://asciinema.org/a/9O6KXdLquyzYtVTUz77vuew1i.svg)](https://asciinema.org/a/9O6KXdLquyzYtVTUz77vuew1i)
